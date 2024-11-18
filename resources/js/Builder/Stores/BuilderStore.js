@@ -1,0 +1,70 @@
+import { defineStore } from 'pinia';
+import { useLocalStorage } from '@vueuse/core';
+// import builderData from '../../src/templates/builder.json';
+import { nanoid } from "nanoid";
+
+export const useBuilderStore = defineStore('builderStore', {
+    state: () => ({
+        builder: {
+            id: 0,
+            settings: [],
+            blocks: []
+        },
+        editor: {
+            layout: 'email',
+        },
+    }),
+    getters: {
+        getBlocks: (state) => {
+            return () => state.builder.blocks
+        },
+        getBuilder: (state) => {
+            return () => state.builder
+        },
+    },
+    actions: {
+        setBuilder(newBuilder) {
+            this.builder = newBuilder;
+        },
+        // setBuilder(newBuilder) {
+        //     if (Object.keys(newBuilder).length) {
+        //         this.builder = newBuilder;
+        //     } else {
+        //         this.builder = builderData;
+        //     }
+        // },
+        resetBuilder() {
+            this.builder = {
+                settings: [],
+                blocks: [],
+                editor: []
+            }
+        },
+
+        findBlockIndex(block) {
+            return this.builder.blocks.findIndex(x => x.uuid === block.uuid);
+        },
+        moveBlock(direction, block) {
+            let index = this.findBlockIndex(block);
+            if (direction === 'up' && index > 0) {
+                let el = this.builder.blocks[index];
+                this.builder.blocks[index] = this.builder.blocks[index - 1];
+                this.builder.blocks[index - 1] = el;
+            }
+            if (direction === 'down' && index !== -1 && index < this.builder.blocks.length - 1) {
+                let el = this.builder.blocks[index];
+                this.builder.blocks[index] = this.builder.blocks[index + 1];
+                this.builder.blocks[index + 1] = el;
+            }
+        },
+        cloneBlock(index) {
+            let newBlock = JSON.parse(JSON.stringify(this.builder.blocks[index]))
+            newBlock.uuid = nanoid();
+            this.builder.blocks.splice(index+1, 0, newBlock);
+        },
+
+        deleteBlock(index) {
+            this.builder.blocks.splice(index, 1)
+        },
+    }
+})

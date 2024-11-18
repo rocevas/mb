@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Šarūnas',
             'email' => 'sarunas@mailbaker.com',
         ]);
+
+        \DB::unprepared(
+            file_get_contents(base_path('database/seeders/templates.sql'))
+        );
     }
 }
