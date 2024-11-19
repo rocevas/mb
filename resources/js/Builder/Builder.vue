@@ -11,7 +11,7 @@
                 <div class="rounded-3xl bg-white w-full shadow overflow-y-auto">
                     <div class="mx-auto max-w-[640px] w-full">
 <!--                    <TiptapEditor />-->
-                        <Draggable class="dragArea w-[50rem] min-h-[10rem] rounded-lg" :list="builderStore.getBlocks()" handle=".handle" group="blocks" item-key="uuid" @change="log" :class="{'border-dashed border-2 border-gray-200': builderStore.getBlocks().length === 0}">
+                        <Draggable class="dragArea min-h-[10rem] rounded-lg" :list="builderStore.getBlocks()" handle=".handle" group="blocks" item-key="uuid" @change="log" :class="{'border-dashed border-2 border-gray-200': builderStore.getBlocks().length === 0}">
                             <template #item="{ element, index }">
                                 <div>
                                     <BlockWrapper :block="element" @clone="cloneBlock(index)" @delete="deleteBlock(index)" />
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-[300px] px-4">
+            <div class="w-[300px] px-4 overflow-y-auto transition-all" :class="{'!w-[0]': !builderStore.isSidebarOptionsOpened()}">
                 <div id="settings">
 
                 </div>

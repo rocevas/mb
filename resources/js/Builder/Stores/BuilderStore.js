@@ -12,6 +12,8 @@ export const useBuilderStore = defineStore('builderStore', {
         },
         editor: {
             layout: 'email',
+            showingSidebarBlocks: false,
+            showingSidebarOptions: false,
         },
     }),
     getters: {
@@ -20,6 +22,12 @@ export const useBuilderStore = defineStore('builderStore', {
         },
         getBuilder: (state) => {
             return () => state.builder
+        },
+        getSelectedOption: (state) => {
+            return () => state.editor.selectedOption
+        },
+        isSidebarOptionsOpened: (state) => {
+            return () => state.editor.showingSidebarOptions
         },
     },
     actions: {
@@ -66,5 +74,13 @@ export const useBuilderStore = defineStore('builderStore', {
         deleteBlock(index) {
             this.builder.blocks.splice(index, 1)
         },
+        setSelectedOption(uuid) {
+            this.editor.selectedOption = uuid;
+        },
+        showSidebarOptions(uuid) {
+            this.editor.showingSidebarBlocks = (uuid === '' || uuid === false);
+            this.editor.showingSidebarOptions = !this.editor.showingSidebarBlocks;
+            this.setSelectedOption(uuid);
+        }
     }
 })

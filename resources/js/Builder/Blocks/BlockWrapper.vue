@@ -41,19 +41,19 @@
         </div>
     </div>
 
-    <teleport to="#settings" v-if="builderStore.getSelectedOption === block.uuid">
-        <div class="absolute inset-0">
-            <div class="flex h-full flex-col divide-y divide-base-200 bg-editor-sidebar shadow-xl">
-                <div class="flex min-h-0 flex-1 flex-col">
+    <teleport to="#settings" v-if="builderStore.getSelectedOption() === block.uuid">
+        <div class="">
+            <div class="flex flex-col divide-y">
+                <div class="flex flex-1 flex-col">
                     <p class="p-2 text-center">{{ block.description }}</p>
-                    <ul class="menu h-screen p-0 overflow-y-auto text-base-content">
+                    <ul class="overflow-y-auto">
                         <component :is="block.optionsComponentName" v-model="block"/>
                     </ul>
                 </div>
                 <!-- Block options: save and cancel buttons -->
-                <div class="flex flex-shrink-0 justify-end p-4 space-x-3 flow-root h-32">
-                    <button type="button" class="btn btn-primary float-left">Save</button>
-                    <button type="button" class="btn float-right">Cancel</button>
+                <div class="flex flex-shrink-0 justify-end p-4 space-x-3">
+                    <button type="button" class="btn btn-primary float-left" @click="builderStore.showSidebarOptions(false)">Save</button>
+                    <button type="button" class="btn float-right" @click="builderStore.showSidebarOptions(false)">Cancel</button>
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
             }
 
             const handleOptionsEvent = (show) => {
-                // builderStore.showSidebarOptions(props.block.uuid);
+                builderStore.showSidebarOptions(props.block.uuid);
             }
 
             return { handleMoveEvent, handleCloneEvent, handleDeleteEvent, handleOptionsEvent, block, builderStore }
