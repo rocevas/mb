@@ -5,11 +5,11 @@ import { nanoid } from "nanoid";
 
 export const useBuilderStore = defineStore('builderStore', {
     state: () => ({
-        builder: {
+        builder: useLocalStorage('builder', {
             id: 0,
             settings: [],
             blocks: []
-        },
+        }),
         editor: {
             layout: 'email',
             showingSidebarBlocks: false,

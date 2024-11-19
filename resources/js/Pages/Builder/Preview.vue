@@ -5,7 +5,7 @@
                 <!-- Start editor area-->
                 <div v-for="(block, index) in draft" :key="block.uuid" class="relative w-full">
                     <div>
-                        <BlockPreviewer :block="block" :first="index == 0"/>
+                        <BlockPreviewer :block="block" :first="index === 0"/>
                     </div>
                 </div>
                 <!-- End editor area -->
@@ -16,12 +16,15 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useBuilderStore } from '../../Builder/Stores/BuilderStore.js';
+import { useBuilderStore } from '@/Builder/Stores/BuilderStore.js';
 import AppLayout from '../../Layouts/BuilderLayout.vue';
 import BlockPreviewer from '../../Builder/Blocks/BlockPreviewer.vue'
 
 const props = defineProps({
-    title: String,
+    title: {
+        type: String,
+        default: 'Preview',
+    },
     template: Object,
 })
 
@@ -29,10 +32,13 @@ const draft = ref([])
 const builderStore = useBuilderStore();
 
 onMounted(() => {
-    if (props.template.template) {
+    if (props.template) {
         builderStore.setBuilder(JSON.parse(props.template.template));
+        draft.value = builderStore.getBlocks();
+    } else {
+        draft.value = builderStore.getBlocks();
     }
-    draft.value = builderStore.getBlocks();
+
 })
 
 </script>

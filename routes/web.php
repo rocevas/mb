@@ -25,8 +25,12 @@ use Inertia\Inertia;
 //});
 
 Route::get('/', [TemplateController::class, 'index'])->name('home');
+
+Route::get('templates/preview', [TemplateController::class, 'preview'])->name('templates.no.preview');
+Route::get('templates/{template?}/preview', [TemplateController::class, 'preview'])->name('templates.preview');
+
 Route::resource('templates', TemplateController::class, ['except' => ['destroy', 'edit']]);
-Route::get('templates/{template}/preview', [TemplateController::class, 'preview'])->name('templates.preview');
+
 Route::any('templates/email', [TemplateController::class, 'email'])->name('templates.email');
 
 

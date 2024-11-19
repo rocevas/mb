@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 class TemplateController extends Controller
 {
 
-    function index(Request $request)
+    function index(Request $request): \Inertia\Response
     {
         return Inertia::render('Builder/Templates', [
             'title' => 'Templates',
@@ -35,11 +35,8 @@ class TemplateController extends Controller
      */
     public function store(StoreTemplateRequest $request): \Illuminate\Http\RedirectResponse
     {
-
         $template = Template::create($request->validated());
-
         return redirect()->route('templates.show', $template)->with(['toast' => ['type' => 'success', 'message' => 'Template created.', 'id' => $template->id]]);
-
     }
 
     function show(Template $template): \Inertia\Response
@@ -61,9 +58,7 @@ class TemplateController extends Controller
 
     }
 
-
-
-    function preview(Template $template): \Inertia\Response
+    function preview(Template $template = null): \Inertia\Response
     {
         return Inertia::render('Builder/Preview', [
             'title' => 'Preview',

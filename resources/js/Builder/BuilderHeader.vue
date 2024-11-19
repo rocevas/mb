@@ -6,9 +6,12 @@
                 </a>
             </div>
         <div class="flex gap-4">
-            <a class="btn btn-square" :href="route('templates.preview', props.template.id)" target="_blank">
+            <a class="btn btn-square" href="/templates/preview" target="_blank">
                 <Icon name="play" styles="w-7 h-7" />
             </a>
+<!--            <a class="btn btn-square" :href="route('templates.preview', props.template.id)" target="_blank">-->
+<!--                <Icon name="play" styles="w-7 h-7" />-->
+<!--            </a>-->
 
             <button class="btn btn-gray" @click="$emit('updateTemplate')">
                 Update
@@ -23,6 +26,9 @@
 
 <script setup>
 import Icon from '../Builder/Icon.vue';
+import { useBuilderStore } from './Stores/BuilderStore.js';
+
+const builderStore = useBuilderStore();
 
 const props = defineProps({
     template: {
