@@ -10,7 +10,6 @@
             <div class="flex flex-1 pb-4">
                 <div class="rounded-3xl bg-white w-full shadow overflow-y-auto">
                     <div class="mx-auto max-w-[640px] w-full">
-<!--                    <TiptapEditor />-->
                         <Draggable class="dragArea min-h-[10rem] rounded-lg" :list="builderStore.getBlocks()" handle=".handle" group="blocks" item-key="uuid" @change="log" :class="{'border-dashed border-2 border-gray-200': builderStore.getBlocks().length === 0}">
                             <template #item="{ element, index }">
                                 <div>
@@ -59,7 +58,6 @@ import {ref, onMounted, onBeforeMount} from 'vue';
 import {useBuilderStore} from './Stores/BuilderStore.js';
 import AppLayout from '../Layouts/BuilderLayout.vue';
 import BuilderHeader from "./BuilderHeader.vue";
-import TiptapEditor from "@/Builder/Blocks/TiptapEditor.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import Draggable from 'vuedraggable';
 import BlockWrapper from "./Blocks/BlockWrapper.vue";
