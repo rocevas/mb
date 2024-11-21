@@ -1,6 +1,7 @@
 <template>
     <AppLayout :title="title">
-        <section class="mt-20 mx-auto w-10/12 relative">
+        <div class="overflow-y-auto">
+            <section class="py-10 px-10 w-full mx-auto container relative">
             <div class="grid grid-cols-4 md:grid-cols-6 justify-center gap-12">
                 <!-- Blank template -->
                 <a href="/templates/create" class="">
@@ -20,6 +21,7 @@
                 </div>
             </div>
         </section>
+        </div>
     </AppLayout>
 </template>
 
