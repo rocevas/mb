@@ -4,7 +4,7 @@
             <component :is="block.componentName" :block="block" class="border-2 border-transparent group-hover:border-primary"/>
         </div>
 
-        <div class="absolute -top-4 left-4 flex flex-row p-0 -ml-1.5 hidden group-hover:flex bg-transparent">
+        <div class="absolute -top-4 left-4 flex flex-row p-0 -ml-1.5 group-hover:flex bg-transparent">
             <div class="flex flex-col items-center justify-center drawer-content pr-2">
                 <label class="btn btn-sm btn-ghost handle drawer-button px-1 rounded-full bg-base-300 group-hover:bg-base-300">
                     <Icon name="draggable" class="h-5 w-5 text-base-content/50 cursor-move"/>
@@ -93,7 +93,6 @@
 
     import ContentLinks from './Content/ContentLinks.vue'
     import ContentLinksOptions from './Content/ContentLinksOptions.vue'
-
 
     export default {
         name: 'BlockWrapper',

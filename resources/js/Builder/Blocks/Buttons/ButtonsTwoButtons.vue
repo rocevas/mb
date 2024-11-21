@@ -14,8 +14,7 @@
 </template>
 
 <script>
-import {computed, defineComponent} from 'vue'
-    import { usePage } from '@inertiajs/vue3'
+import {computed, defineComponent, inject} from 'vue'
 
     export default defineComponent({
         name: 'ButtonsTwoButtons',
@@ -33,8 +32,9 @@ import {computed, defineComponent} from 'vue'
             },
         },
         setup() {
-            const builderMode = computed(() => usePage().props.value.builderMode)
+            const builderMode = computed(() => inject('builderMode')); //edit or preview
             return { builderMode }
+
         },
     })
 </script>

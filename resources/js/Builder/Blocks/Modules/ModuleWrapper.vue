@@ -26,7 +26,7 @@
     </div>
 
     <teleport to="#settings" v-if="builderStore.getSelectedOption() === module.uuid">
-        <div class="absolute inset-0">
+        <div class="">
             <div class="flex h-full flex-col divide-y divide-base-200 bg-editor-sidebar shadow-xl">
                 <div class="flex min-h-0 flex-1 flex-col">
                     <p class="p-2 text-center">{{ optionsTitle || 'Options' }}</p>

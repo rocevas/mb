@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import { computed } from "vue";
+import {computed, inject} from "vue";
     import { usePage } from '@inertiajs/vue3'
 
     export default {
@@ -37,7 +37,7 @@
             }
         },
         setup() {
-            const builderMode = computed(() => usePage().props.value.builderMode)
+            const builderMode = computed(() => inject('builderMode')); //edit or preview
             return { builderMode }
         },
     }

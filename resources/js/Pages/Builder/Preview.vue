@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import {onMounted, provide, ref} from 'vue'
 import { useBuilderStore } from '@/Builder/Stores/BuilderStore.js';
 import AppLayout from '../../Layouts/BuilderLayout.vue';
 import BlockPreviewer from '../../Builder/Blocks/BlockPreviewer.vue'
@@ -27,6 +27,9 @@ const props = defineProps({
     },
     template: Object,
 })
+
+const builderMode = 'preview';
+provide('builderMode', builderMode);
 
 const draft = ref([])
 const builderStore = useBuilderStore();
