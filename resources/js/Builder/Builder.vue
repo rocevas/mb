@@ -4,16 +4,16 @@
             <BuilderHeader :template="template" @showSaveTemplateModal="saveTemplateModal = true" @updateTemplate="updateTemplate()" />
         </template>
         <main class="flex overflow-hidden relative">
-            <div class="w-[300px] px-4">
-                Left
+            <div class="w-[300px] px-4 overflow-y-auto">
+                <BlockGroup v-for="group in groups" :key="group.uuid" :title="group.title" :blocks="group.blocks"/>
             </div>
             <div class="flex flex-1 pb-4">
                 <div class="rounded-3xl bg-white w-full shadow overflow-y-auto">
                     <div class="mx-auto max-w-[640px] w-full">
-                        <Draggable class="dragArea min-h-[10rem] rounded-lg" :list="builderStore.getBlocks()" handle=".handle" group="blocks" item-key="uuid" @change="log" :class="{'border-dashed border-2 border-gray-200': builderStore.getBlocks().length === 0}">
+                        <Draggable class="dragArea min-h-[10rem] rounded-lg" :list="builderStore.getBlocks()" handle=".handle" group="blocks" item-key="uuid" :class="{'border-dashed border-2 border-gray-200': builderStore.getBlocks().length === 0}">
                             <template #item="{ element, index }">
                                 <div>
-                                    <BlockWrapper :block="element" @clone="cloneBlock(index)" @delete="deleteBlock(index)" />
+                                    <BlockWrapper :block="element" :index="index" @clone="cloneBlock(index)" @delete="deleteBlock(index)" />
                                 </div>
                             </template>
                         </Draggable>
@@ -53,24 +53,23 @@
 </template>
 
 <script setup>
-import {useForm, usePage} from '@inertiajs/vue3';
-import {ref, onMounted, onBeforeMount} from 'vue';
+import {useForm} from '@inertiajs/vue3';
+import {ref, onMounted, onBeforeMount, computed} from 'vue';
+import Draggable from 'vuedraggable';
 import {useBuilderStore} from './Stores/BuilderStore.js';
 import AppLayout from '../Layouts/BuilderLayout.vue';
 import BuilderHeader from "./BuilderHeader.vue";
 import DialogModal from "@/Components/DialogModal.vue";
-import Draggable from 'vuedraggable';
 import BlockWrapper from "./Blocks/BlockWrapper.vue";
+import BlockGroup from "./Blocks/BlockGroup.vue";
 
 const props = defineProps({
     title: String,
-    template: {
-        type: Object,
-        default: () => ({})
-    },
+    template: Object,
 })
 
 const builderStore = useBuilderStore();
+const selectedOption = ref('');
 
 const saveTemplateModal = ref(false);
 
@@ -79,17 +78,17 @@ const templateForm = useForm({
     template: ''
 });
 
-
-
-const log = (evt) => {
-    console.log(evt);
-}
+// Cache the result of getGroups
+const groups = computed(() => builderStore.getGroups);
 
 // builder
 const cloneBlock = (index) => {
     builderStore.cloneBlock(index);
 }
 const deleteBlock = (index) => {
+    if (builderStore.getBlocks()[index].uuid === selectedOption.value) {
+        showOptions('');
+    }
     builderStore.deleteBlock(index);
 }
 

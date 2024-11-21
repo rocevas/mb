@@ -1,7 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
 
-import { createPinia } from 'pinia'
+import { createPinia } from 'pinia';
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -16,15 +16,6 @@ createInertiaApp({
             .use(plugin)
             .use(createPinia())
             .use(ZiggyVue);
-
-        // Global error handler
-        app.config.errorHandler = (err, vm, info) => {
-            // Handle the error
-            console.error('Error:', err);
-            console.error('Info:', info);
-            // You can also show a user-friendly message or log the error to an external service
-        };
-
         app.mount(el);
     },
     progress: {

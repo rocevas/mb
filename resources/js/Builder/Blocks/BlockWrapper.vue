@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import {computed, ref} from 'vue'
+    import {computed} from 'vue'
     import {useBuilderStore} from '../Stores/BuilderStore.js'
     import Icon from '../Icon.vue'
 
@@ -136,14 +136,18 @@
                 required: true,
                 default: () => ({})
             },
+            index: {
+                type: Number,
+                required: true
+            }
         },
         setup(props, context) {
+            const builderStore = useBuilderStore()
+
             const block = computed({
                 get: () => props.block,
                 set: (value) => context.emit('update:modelValue', value),
             })
-
-            const builderStore = useBuilderStore()
 
             const handleMoveEvent = (direction) => {
                 builderStore.moveBlock(direction, props.block);
@@ -160,6 +164,11 @@
             const handleOptionsEvent = (show) => {
                 builderStore.showSidebarOptions(props.block.uuid);
             }
+            // const handleOptionsEvent = (show) => {
+            //     if (builderStore.getSelectedOption() !== props.block.uuid) {
+            //         builderStore.showSidebarOptions(props.block.uuid);
+            //     }
+            // };
 
             return { handleMoveEvent, handleCloneEvent, handleDeleteEvent, handleOptionsEvent, block, builderStore }
         },

@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { useLocalStorage } from '@vueuse/core';
 // import builderData from '../../src/templates/builder.json';
+import blocks from "../Blocks/blocks.js";
+import builderData from '../builder.json';
 import { nanoid } from "nanoid";
 
 export const useBuilderStore = defineStore('builderStore', {
@@ -17,6 +19,14 @@ export const useBuilderStore = defineStore('builderStore', {
         },
     }),
     getters: {
+        getGroups: () => {
+            return blocks.groups.value
+                .map((groups) => {
+                    groups.blocks = groups.blocks.filter((block) => block.visible);
+                    return groups;
+                })
+                .filter((groups) => groups.blocks.length !== 0);
+        },
         getBlocks: (state) => {
             return () => state.builder.blocks
         },
@@ -29,18 +39,21 @@ export const useBuilderStore = defineStore('builderStore', {
         isSidebarOptionsOpened: (state) => {
             return () => state.editor.showingSidebarOptions
         },
+        getPageBlocks: (state) => {
+            return (blocks) => {
+                // activePage can be empty - for previewing multiple pages in single html page
+                return state.builder.blocks
+            }
+        },
     },
     actions: {
         setBuilder(newBuilder) {
-            this.builder = newBuilder;
+            if (Object.keys(newBuilder).length) {
+                this.builder = newBuilder;
+            } else {
+                this.builder = builderData;
+            }
         },
-        // setBuilder(newBuilder) {
-        //     if (Object.keys(newBuilder).length) {
-        //         this.builder = newBuilder;
-        //     } else {
-        //         this.builder = builderData;
-        //     }
-        // },
         resetBuilder() {
             this.builder = {
                 settings: [],
@@ -78,9 +91,11 @@ export const useBuilderStore = defineStore('builderStore', {
             this.editor.selectedOption = uuid;
         },
         showSidebarOptions(uuid) {
-            this.editor.showingSidebarBlocks = (uuid === '' || uuid === false);
-            this.editor.showingSidebarOptions = !this.editor.showingSidebarBlocks;
-            this.setSelectedOption(uuid);
+            if (this.editor.selectedOption !== uuid) {
+                this.editor.showingSidebarBlocks = (uuid === '' || uuid === false);
+                this.editor.showingSidebarOptions = !this.editor.showingSidebarBlocks;
+                this.setSelectedOption(uuid);
+            }
         }
     }
 })

@@ -1,0 +1,150 @@
+{
+    "settings": {
+        "typography": {
+            "link": {
+                "color": "#000000",
+                "fontStyle": "underline"
+            },
+            "name": "Typography Style",
+            "heading": {
+                "h1": {
+                    "name": "Heading 1",
+                    "size": "48",
+                    "color": "#000000"
+                },
+                "h2": {
+                    "name": "Heading 2",
+                    "size": "40",
+                    "color": "#000000"
+                },
+                "h3": {
+                    "name": "Heading 3",
+                    "size": "32",
+                    "color": "#000000"
+                },
+                "h4": {
+                    "name": "Heading 4",
+                    "size": "24",
+                    "color": "#000000"
+                },
+                "fontStyle": "regular",
+                "fontFamily": "Inter, sans-serif",
+                "fontWeight": "600",
+                "lineHeight": "100%",
+                "letterSpacing": "-0.025"
+            },
+            "paragraph": {
+                "p1": {
+                    "name": "Paragraph 1",
+                    "size": "18",
+                    "color": "#555555"
+                },
+                "p2": {
+                    "name": "Paragraph 2",
+                    "size": "20",
+                    "color": "#555555"
+                },
+                "p3": {
+                    "name": "Paragraph 3",
+                    "size": "16",
+                    "color": "#555555"
+                },
+                "fontStyle": "regular",
+                "fontFamily": "Inter, sans-serif",
+                "fontWeight": "400",
+                "lineHeight": "150%",
+                "letterSpacing": "0"
+            }
+        },
+        "callToAction": {
+            "name": "Call to action",
+            "primary": {
+                "color": "#ffffff",
+                "shape": "shape 1",
+                "borderSize": "2",
+                "fontFamily": "Inter, sans-serif",
+                "fontWeight": "500",
+                "borderColor": "#2cb191",
+                "letterSpacing": "0",
+                "backgroundColor": "#2cb191"
+            },
+            "secondary": {
+                "color": "#ffffff",
+                "shape": "shape 1",
+                "borderSize": "2",
+                "fontFamily": "Inter, sans-serif",
+                "fontWeight": "500",
+                "borderColor": "#000000",
+                "letterSpacing": "0",
+                "backgroundColor": "#000000"
+            },
+            "tertiary": {
+                "color": "#000000",
+                "shape": "shape 2",
+                "borderSize": "1",
+                "fontFamily": "Inter, sans-serif",
+                "fontWeight": "500",
+                "borderColor": "#d4d4d4",
+                "letterSpacing": "0",
+                "backgroundColor": "#ffffff"
+            },
+            "sizes": {
+                "regular": {
+                    "fontSize": "16",
+                    "height": "46",
+                    "corners": "8"
+                },
+                "large": {
+                    "fontSize": "16",
+                    "height": "54",
+                    "corners": "10"
+                },
+                "small": {
+                    "fontSize": "14",
+                    "height": "38",
+                    "corners": "6"
+                }
+            }
+        },
+        "form": {
+            "input": {
+                "color": "#000000",
+                "borderSize": "1",
+                "fontFamily": "Inter, sans-serif",
+                "borderColor": "#d4d4d4",
+                "backgroundColor": "#ffffff"
+            },
+            "label": {
+                "color": "#000000",
+                "fontSize": "14",
+                "fontFamily": "Inter, sans-serif",
+                "fontWeight": "500",
+                "letterSpacing": "0"
+            }
+        },
+        "links": {
+            "socialLinks": [
+                {
+                    "uuid": "FpRBNvAwGieC9423DNJrVW",
+                    "url": "",
+                    "type": "facebook",
+                    "label": "Facebook"
+                },
+                {
+                    "uuid": "A3RzD5huKzNu8b4LQyVmX",
+                    "url": "",
+                    "type": "github",
+                    "label": "Github"
+                },
+                {
+                    "uuid": "LvPfNmqWzZxjtwK9MrZnEz",
+                    "url": "",
+                    "type": "instagram",
+                    "label": "Instagram"
+                }
+            ]
+        }
+    },
+    "blocks": [],
+    "id": 1
+}
