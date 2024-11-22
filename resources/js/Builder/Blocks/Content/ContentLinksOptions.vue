@@ -48,7 +48,7 @@
 
 <script setup>
 import { defineComponent, computed, ref } from 'vue'
-import Icon from '../../Icon.vue'
+import Icon from '../../Components/Icon.vue'
 import { nanoid } from "nanoid";
 
 const props = defineProps({

@@ -47,7 +47,7 @@
                 <div class="flex flex-1 flex-col">
                     <p class="p-2 text-center">{{ block.description }}</p>
                     <ul class="overflow-y-auto">
-                        <component :is="block.optionsComponentName" v-model="block"/>
+                        <component :is="blocks[block?.optionsComponentName]" v-model="block" @showFileManager="handleShowFileManager"/>
                     </ul>
                 </div>
                 <!-- Block options: save and cancel buttons -->
@@ -63,7 +63,7 @@
 <script setup>
 import {computed} from 'vue'
 import {useBuilderStore} from '../Stores/BuilderStore.js'
-import Icon from '../Icon.vue'
+import Icon from '../Components/Icon.vue'
 
 import ButtonsButton from './Buttons/ButtonsButton.vue'
 import ButtonsButtonOptions from './Buttons/ButtonsButtonOptions.vue'
@@ -129,6 +129,10 @@ const handleDeleteEvent = () => {
 
 const handleOptionsEvent = (show) => {
     builderStore.showSidebarOptions(props.block.uuid);
+}
+
+const handleShowFileManager = (block, name) => {
+    builderStore.filemanager.showFileManager(block, name);
 }
 
 const blocks = {

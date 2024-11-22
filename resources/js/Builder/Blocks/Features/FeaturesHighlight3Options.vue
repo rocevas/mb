@@ -18,7 +18,7 @@
             <div>
                 <h3 class="font-medium">Image</h3>
                 <div class="btn aspect-w-5 w-16 h-16 overflow-hidden">
-                    <img :src="imageUrl" alt="" class="object-cover" />
+                    <img :src="imageUrl" alt="" class="object-cover" @click="$emit('showFileManager', block.data, 'imageUrl')" />
                 </div>
             </div>
             <div>
@@ -67,7 +67,7 @@
 
 <script setup>
 import { defineComponent, computed, ref } from 'vue'
-import Icon from '../../Icon.vue'
+import Icon from '../../Components/Icon.vue'
 import { nanoid } from "nanoid";
 
 const props = defineProps({
@@ -77,7 +77,7 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['update:modelValue', 'showFilemanager']);
+const emit = defineEmits(['update:modelValue', 'showFileManager']);
 
 const block = computed({
     get: () => props.modelValue,

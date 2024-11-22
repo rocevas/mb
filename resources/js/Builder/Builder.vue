@@ -33,6 +33,8 @@
         </main>
     </AppLayout>
 
+    <FileManager :show="builderStore.filemanager.visible" />
+
     <!-- Save template modal -->
     <DialogModal :show="saveTemplateModal" @close="close">
         <template #title>
@@ -67,6 +69,7 @@ import BuilderHeader from "./BuilderHeader.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import BlockWrapper from "./Blocks/BlockWrapper.vue";
 import BlockGroup from "./Blocks/BlockGroup.vue";
+import FileManager from "./FileManager/FileManager.vue";
 
 const props = defineProps({
     title: String,

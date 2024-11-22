@@ -46,7 +46,7 @@
 
 <script setup>
 import {computed, ref, defineAsyncComponent, onMounted} from 'vue'
-import Icon from "../../Icon.vue";
+import Icon from "../../Components/Icon.vue";
 import {useBuilderStore} from "../../Stores/BuilderStore.js";
 
 const emit = defineEmits(['clone', 'delete', 'options', 'update:modelValue'])

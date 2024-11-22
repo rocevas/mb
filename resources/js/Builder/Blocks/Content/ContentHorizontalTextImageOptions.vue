@@ -5,7 +5,7 @@
             <div>
                 <span class="text-sm font-medium uppercase">Image</span>
                 <div class="btn aspect-w-10 aspect-h-7 block w-full overflow-hidden rounded-lg">
-                    <img :src="block.data.imageUrl" alt="" class="object-cover" @click="$emit('showFilemanager', block.data, 'imageUrl')" />
+                    <img :src="block.data.imageUrl" alt="" class="object-cover" @click="$emit('showFileManager', block.data, 'imageUrl')" />
                 </div>
             </div>
             <div>
@@ -40,7 +40,7 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['update:modelValue', 'showFilemanager']);
+const emit = defineEmits(['update:modelValue', 'showFileManager']);
 
 const block = computed({
     get: () => props.modelValue,

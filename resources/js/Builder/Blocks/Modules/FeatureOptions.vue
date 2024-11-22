@@ -4,7 +4,7 @@
         <div>
             <h3 class="font-medium">Image</h3>
             <div class="btn aspect-w-5 w-16 h-16 overflow-hidden">
-                <img :src="module.imageUrl" alt="" class="object-cover" @click="builderStore.filemanager.showFilemanager(module,'imageUrl')" />
+                <img :src="module.imageUrl" alt="" class="object-cover" @click="builderStore.filemanager.showFileManager(module,'imageUrl')" />
             </div>
         </div>
         <div>
@@ -26,7 +26,7 @@
 import {computed} from 'vue'
 import {useBuilderStore} from "../../Stores/BuilderStore.js";
 
-const emit = defineEmits(['update:modelValue', 'showFilemanager'])
+const emit = defineEmits(['update:modelValue', 'showFileManager'])
 
 const props = defineProps({
     module: {

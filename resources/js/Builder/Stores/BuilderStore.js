@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { useLocalStorage } from '@vueuse/core';
-// import builderData from '../../src/templates/builder.json';
+import { useFileManagerStore } from './FileManagerStore.js';
 import blocks from "../Blocks/blocks.js";
 import builderData from '../builder.json';
 import { nanoid } from "nanoid";
@@ -12,6 +12,7 @@ export const useBuilderStore = defineStore('builderStore', {
             settings: [],
             blocks: []
         }),
+        filemanager: useFileManagerStore(),
         editor: {
             layout: 'email',
             showingSidebarBlocks: false,

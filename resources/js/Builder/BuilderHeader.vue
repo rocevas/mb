@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import Icon from '../Builder/Icon.vue';
+import Icon from './Components/Icon.vue';
 import { useBuilderStore } from './Stores/BuilderStore.js';
 
 const builderStore = useBuilderStore();
