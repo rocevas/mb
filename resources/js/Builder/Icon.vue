@@ -14,18 +14,15 @@
 
 </template>
 
-<script>
-    export default {
-        name: 'Icon',
-        props: {
-            name: {
-                type: String,
-                required: true
-            },
-            styles: {
-                type: String,
-                default: 'h-5 w-5'
-            },
-        },
-    }
+<script setup>
+const props = defineProps({
+    name: {
+        type: String,
+        required: true
+    },
+    styles: {
+        type: String,
+        default: 'h-5 w-5'
+    },
+})
 </script>

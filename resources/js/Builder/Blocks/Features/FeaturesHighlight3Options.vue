@@ -65,62 +65,54 @@
     </div>
 </template>
 
-<script>
-    import { defineComponent, computed, ref } from 'vue'
-    import Icon from '../../Icon.vue'
-    import { nanoid } from "nanoid";
+<script setup>
+import { defineComponent, computed, ref } from 'vue'
+import Icon from '../../Icon.vue'
+import { nanoid } from "nanoid";
 
-    export default defineComponent({
-        name: 'FeaturesHighlight3Options',
-        emits: ['update:modelValue', 'showFilemanager'],
-        components: {
-            Icon,
-        },
-        props: {
-            modelValue: {
-                type: Object,
-                default: () => ({}),
-            }
-        },
-        setup(props, context) {
-            const block = computed({
-                get: () => props.modelValue,
-                set: (value) => context.emit('update:modelValue', value),
-            })
+const props = defineProps({
+    modelValue: {
+        type: Object,
+        default: () => ({}),
+    }
+})
 
-            const imageUrl = ref('https://cdn.mailerlite.com/images/editor/icon1.png')
-            const title = ref('New feature')
-            const description = ref('Check out this new awesome feature')
+const emit = defineEmits(['update:modelValue', 'showFilemanager']);
 
-            const add = () => {
-                block.value.data.list.push({
-                    uuid: nanoid(),
-                    imageUrl: imageUrl.value,
-                    title: title.value,
-                    description: description.value,
-                })
+const block = computed({
+    get: () => props.modelValue,
+    set: (value) => emit('update:modelValue', value),
+});
 
-                title.value = ''
-                description.value = ''
-            }
+const imageUrl = ref('https://cdn.mailerlite.com/images/editor/icon1.png')
+const title = ref('New feature')
+const description = ref('Check out this new awesome feature')
 
-            const remove = (uuidToRemove) => {
-                const index = block.value.data.list.findIndex((features) => {
-                    return features.uuid == uuidToRemove
-                })
-
-                block.value.data.list.splice(index, 1);
-            }
-
-            const truncateText = (text, length = 15) => {
-                if(text.length <= 15) {
-                    return text
-                }
-
-                return text.substring(0, length) + '...'
-            }
-
-            return { block, add, remove, imageUrl, title, description, truncateText }
-        },
+const add = () => {
+    block.value.data.list.push({
+        uuid: nanoid(),
+        imageUrl: imageUrl.value,
+        title: title.value,
+        description: description.value,
     })
+
+    title.value = ''
+    description.value = ''
+}
+
+const remove = (uuidToRemove) => {
+    const index = block.value.data.list.findIndex((features) => {
+        return features.uuid === uuidToRemove
+    })
+
+    block.value.data.list.splice(index, 1);
+}
+
+const truncateText = (text, length = 15) => {
+    if(text.length <= 15) {
+        return text
+    }
+
+    return text.substring(0, length) + '...'
+}
 </script>

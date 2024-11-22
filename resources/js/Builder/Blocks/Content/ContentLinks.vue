@@ -15,25 +15,26 @@
     </div>
 </template>
 
-<script>
-import {computed, defineComponent} from 'vue'
-    import { usePage } from '@inertiajs/vue3'
+<script setup>
+import {computed, inject} from 'vue'
+import { usePage } from '@inertiajs/vue3'
 
-    export default defineComponent({
-        name: 'ContentLinks',
-        props: {
-            block: {
-                type: Object,
-                required: true,
-            },
-            first: {
-                type: Boolean,
-                default: false
-            }
-        },
-        setup() {
-            const builderMode = computed(() => usePage().props.value.builderMode)
-            return { builderMode }
-        },
-    })
+const props = defineProps({
+    block: {
+        type: Object,
+        required: true
+    },
+    first: {
+        type: Boolean,
+        default: false
+    }
+})
+
+const updateContent = (e, contentType) => {
+    if (props.block.data[contentType]) {
+        props.block.data[contentType] = e.target.innerText;
+    }
+};
+
+const builderMode = computed(() => inject('builderMode'));
 </script>

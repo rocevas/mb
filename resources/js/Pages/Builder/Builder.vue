@@ -3,11 +3,11 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
-    import Builder from '@/Builder/Builder.vue';
+import { ref } from 'vue';
+import Builder from '@/Builder/Builder.vue';
 
-    const props = defineProps({
-        title: String,
-        template: Object,
-    })
+const props = defineProps({
+    title: String,
+    template: Object,
+})
 </script>

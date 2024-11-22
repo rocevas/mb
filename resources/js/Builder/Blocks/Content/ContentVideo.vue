@@ -20,25 +20,25 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import {computed, inject} from "vue";
-    import { usePage } from '@inertiajs/vue3'
 
-    export default {
-        name: 'ContentVideo',
-        props: {
-            block: {
-                type: Object,
-                required: true,
-            },
-            first: {
-                type: Boolean,
-                default: false
-            }
-        },
-        setup() {
-            const builderMode = computed(() => inject('builderMode')); //edit or preview
-            return { builderMode }
-        },
+const props = defineProps({
+    block: {
+        type: Object,
+        required: true
+    },
+    first: {
+        type: Boolean,
+        default: false
     }
+})
+
+const updateContent = (e, contentType) => {
+    if (props.block.data[contentType]) {
+        props.block.data[contentType] = e.target.innerText;
+    }
+};
+
+const builderMode = computed(() => inject('builderMode'));
 </script>

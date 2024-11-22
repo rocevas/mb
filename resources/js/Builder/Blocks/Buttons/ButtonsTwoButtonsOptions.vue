@@ -28,28 +28,20 @@
     </div>
 </template>
 
-<script>
-    import { defineComponent, computed } from 'vue'
+<script setup>
+import {computed} from 'vue'
 
-    export default defineComponent({
-        name: 'ButtonsTwoButtonsOptions',
-        emits: ['update:modelValue'],
-        components: {
+const props = defineProps({
+    modelValue: {
+        type: Object,
+        default: () => ({}),
+    }
+})
 
-        },
-        props: {
-            modelValue: {
-                type: Object,
-                default: () => ({}),
-            }
-        },
-        setup(props, context) {
-            const block = computed({
-                get: () => props.modelValue,
-                set: (value) => context.emit('update:modelValue', value),
-            })
+const emit = defineEmits(['update:modelValue']);
 
-            return { block }
-        },
-    })
+const block = computed({
+    get: () => props.modelValue,
+    set: (value) => emit('update:modelValue', value),
+});
 </script>

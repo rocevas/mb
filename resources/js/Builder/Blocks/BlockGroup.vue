@@ -1,8 +1,8 @@
 <template>
     <ul class="list-none">
-        <li class="text-lg font-bold">{{ title }}</li>
+        <li class="text-lg font-bold ">{{ title }}</li>
         <Draggable
-            class="dragArea list-group"
+            class="cursor-move"
             :list="blocks"
             :sort="false"
             :clone="clone"
@@ -41,8 +41,6 @@ const props = defineProps({
         required: true
     }
 });
-
-// const emit = defineEmits(['clone', 'blocks']);
 
 const clone = (block) => {
     let newBlock = JSON.parse(JSON.stringify(block))

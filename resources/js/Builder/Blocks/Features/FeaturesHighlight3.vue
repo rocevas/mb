@@ -21,41 +21,41 @@
 </template>
 
 <script setup>
-    import { computed } from 'vue'
-    import ModulesFeature from "../Modules/Feature.vue";
-    import { nanoid } from "nanoid";
+       import { computed } from 'vue'
+import ModulesFeature from "../Modules/Feature.vue";
+import { nanoid } from "nanoid";
 
-    const props = defineProps({
-        block: {
-            type: Object,
-            default: {}
-        }
-    });
-
-    const emit = defineEmits(['update:modelValue'])
-
-    const block = computed({
-        get() {
-            return props.block
-        },
-        set(value) {
-            emit('update:modelValue', value)
-        }
-    })
-
-    const deleteModule = (index) => {
-        props.block.data.list.splice(index, 1)
+const props = defineProps({
+    block: {
+        type: Object,
+        default: {}
     }
+});
 
-    const cloneModule = (index) => {
-        let newModule = JSON.parse(JSON.stringify(props.block.data.list[index]))
-        newModule.uuid = nanoid();
-        props.block.data.list.splice(index+1, 0, newModule);
-    }
+const emit = defineEmits(['update:modelValue'])
 
-    const updateContent = (e, contentType) => {
-        if ( props.block.data[contentType] ) {
-            props.block.data[contentType] = e.target.innerText;
-        }
+const block = computed({
+    get() {
+        return props.block
+    },
+    set(value) {
+        emit('update:modelValue', value)
     }
+})
+
+const deleteModule = (index) => {
+    props.block.data.list.splice(index, 1)
+}
+
+const cloneModule = (index) => {
+    let newModule = JSON.parse(JSON.stringify(props.block.data.list[index]))
+    newModule.uuid = nanoid();
+    props.block.data.list.splice(index+1, 0, newModule);
+}
+
+const updateContent = (e, contentType) => {
+    if ( props.block.data[contentType] ) {
+        props.block.data[contentType] = e.target.innerText;
+    }
+}
 </script>

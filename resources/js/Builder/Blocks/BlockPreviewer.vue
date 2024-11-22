@@ -1,12 +1,12 @@
 <template>
     <div class="relative">
         <div>
-            <component :is="block.componentName" :block="block" :first="first"/>
+            <component :is="blocks[block?.componentName]" :block="block" :first="first"/>
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
 import ButtonsButton from './Buttons/ButtonsButton.vue'
 import ContentImage from './Content/ContentImage.vue'
 import ContentText from "./Content/ContentText.vue";
@@ -21,30 +21,27 @@ import FeaturesHighlight3 from './Features/FeaturesHighlight3.vue'
 
 import HeaderLogo from './Header/HeaderLogo.vue'
 
+const props = defineProps({
+    block: {
+        type: Object,
+        required: true
+    },
+    first: {
+        type: Boolean,
+        default: false
+    }
+})
 
-export default {
-    name: 'BlockPreviewer',
-    components: {
-        ButtonsButton,
-        ContentImage,
-        ContentText,
-        ContentTitle,
-        ContentVideo,
-        ContentHorizontalImageText,
-        ContentHorizontalTextImage,
-        ContentLinks,
-        FeaturesHighlight3,
-        HeaderLogo,
-    },
-    props: {
-        block: {
-            type: Object,
-            required: true
-        },
-        first: {
-            type: Boolean,
-            default: false
-        }
-    },
+const blocks = {
+    ButtonsButton,
+    ContentImage,
+    ContentText,
+    ContentTitle,
+    ContentVideo,
+    ContentHorizontalImageText,
+    ContentHorizontalTextImage,
+    ContentLinks,
+    FeaturesHighlight3,
+    HeaderLogo,
 }
 </script>

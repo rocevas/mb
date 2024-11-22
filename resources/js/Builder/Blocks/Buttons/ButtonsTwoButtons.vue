@@ -13,28 +13,21 @@
     </div>
 </template>
 
-<script>
-import {computed, defineComponent, inject} from 'vue'
+<script setup>
+import {computed,inject} from 'vue'
 
-    export default defineComponent({
-        name: 'ButtonsTwoButtons',
-        props: {
-            block: {
-                type: Object,
-                required: true
-            },
-        },
-        methods: {
-            updateContent(e, contentType) {
-                if ( this.block.data[contentType] ) {
-                    this.block.data[contentType] = e.target.innerText;
-                }
-            },
-        },
-        setup() {
-            const builderMode = computed(() => inject('builderMode')); //edit or preview
-            return { builderMode }
+const props = defineProps({
+    block: {
+        type: Object,
+        required: true
+    },
+})
 
-        },
-    })
+const updateContent = (e, contentType) => {
+    if (props.block.data[contentType]) {
+        props.block.data[contentType] = e.target.innerText;
+    }
+};
+
+const builderMode = computed(() => inject('builderMode'));
 </script>

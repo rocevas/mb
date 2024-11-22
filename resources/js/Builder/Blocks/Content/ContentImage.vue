@@ -8,19 +8,15 @@
     </div>
 </template>
 
-<script>
-    import { defineComponent } from 'vue'
+<script setup>
+import {computed, inject} from 'vue'
 
-    export default defineComponent({
-        name: 'ContentImage',
-        props: {
-            block: {
-                type: Object,
-                required: true
-            },
-        },
-        setup() {
+const props = defineProps({
+    block: {
+        type: Object,
+        required: true
+    },
+})
 
-        },
-    })
+const builderMode = computed(() => inject('builderMode'));
 </script>

@@ -10,26 +10,21 @@
     </div>
 </template>
 
-<script>
-    import { defineComponent } from 'vue'
+<script setup>
+import {computed, defineComponent, inject} from 'vue'
 
-    export default defineComponent({
-        name: 'ContentTitle',
-        props: {
-            block: {
-                type: Object,
-                required: true
-            },
-        },
-        methods: {
-            updateContent(e, contentType) {
-                if ( this.block.data[contentType] ) {
-                    this.block.data[contentType] = e.target.innerText;
-                }
-            },
-        },
-        setup() {
+const props = defineProps({
+    block: {
+        type: Object,
+        required: true
+    },
+})
 
-        },
-    })
+const updateContent = (e, contentType) => {
+    if (props.block.data[contentType]) {
+        props.block.data[contentType] = e.target.innerText;
+    }
+};
+
+const builderMode = computed(() => inject('builderMode'));
 </script>

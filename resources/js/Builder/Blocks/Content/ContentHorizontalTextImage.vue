@@ -19,28 +19,26 @@
     </div>
 </template>
 
-<script>
-    export default {
-        name: 'ContentHorizontalTextImage',
-        props: {
-            block: {
-                type: Object,
-                required: true,
-            },
-            first: {
-                type: Boolean,
-                default: false
-            }
-        },
-        methods: {
-            updateContent(e, contentType) {
-                if ( this.block.data[contentType] ) {
-                    this.block.data[contentType] = e.target.innerText;
-                }
-            },
-        },
-        setup() {
+<script setup>
 
-        },
+import {computed, inject} from "vue";
+
+const props = defineProps({
+    block: {
+        type: Object,
+        required: true
+    },
+    first: {
+        type: Boolean,
+        default: false
     }
+})
+
+const updateContent = (e, contentType) => {
+    if (props.block.data[contentType]) {
+        props.block.data[contentType] = e.target.innerText;
+    }
+};
+
+const builderMode = computed(() => inject('builderMode'));
 </script>

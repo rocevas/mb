@@ -9,32 +9,26 @@
     </div>
 </template>
 
-<script>
-    import { defineComponent, computed } from 'vue'
+<script setup>
+import { defineComponent, computed } from 'vue'
 
-    export default defineComponent({
-        name: 'ContentVideoOptions',
-        emits: ['update:modelValue'],
-        props: {
-            modelValue: {
-                type: Object,
-                default: () => ({}),
-            }
-        },
-        methods: {
-            handleYoutubeUrlChanged(event, block){
-                let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-                let match = event.target.value.match(regExp);
-                block.data.youtubeVideoCode = (match && match[7].length==11) ? match[7] : '';
-            }
-        },
-        setup(props, context) {
-            const block = computed({
-                get: () => props.modelValue,
-                set: (value) => context.emit('update:modelValue', value),
-            })
+const props = defineProps({
+    modelValue: {
+        type: Object,
+        default: () => ({}),
+    }
+})
 
-            return { block }
-        },
-    })
+const emit = defineEmits(['update:modelValue']);
+
+const block = computed({
+    get: () => props.modelValue,
+    set: (value) => emit('update:modelValue', value),
+});
+
+const handleYoutubeUrlChanged = (event, block) => {
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = event.target.value.match(regExp);
+    block.data.youtubeVideoCode = match && match[7].length === 11 ? match[7] : '';
+};
 </script>

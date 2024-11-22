@@ -46,60 +46,47 @@
     </div>
 </template>
 
-<script>
-    import { defineComponent, computed, ref } from 'vue'
-    import Icon from '../../Icon.vue'
-    import { nanoid } from "nanoid";
+<script setup>
+import { defineComponent, computed, ref } from 'vue'
+import Icon from '../../Icon.vue'
+import { nanoid } from "nanoid";
 
-    export default defineComponent({
-        name: 'ContentLinksOptions',
-        emits: ['update:modelValue'],
-        components: {
-            Icon,
-        },
-        props: {
-            modelValue: {
-                type: Object,
-                default: () => ({}),
-            }
-        },
-        setup(props, context) {
-            const block = computed({
-                get: () => props.modelValue,
-                set: (value) => context.emit('update:modelValue', value),
-            })
+const props = defineProps({
+    modelValue: {
+        type: Object,
+        default: () => ({}),
+    }
+})
 
-            const title = ref('')
-            const url = ref('')
+const emit = defineEmits(['update:modelValue']);
 
-            const add = () => {
-                block.value.data.links.push({
-                    uuid: nanoid(),
-                    title: title.value,
-                    url: url.value,
-                })
+const block = computed({
+    get: () => props.modelValue,
+    set: (value) => emit('update:modelValue', value),
+});
 
-                title.value = ''
-                url.value = ''
-            }
+const title = ref('');
+const url = ref('');
 
-            const remove = (uuidToRemove) => {
-                const index = block.value.data.links.findIndex((link) => {
-                    return link.uuid == uuidToRemove
-                })
+const add = () => {
+    block.value.data.links.push({
+        uuid: nanoid(),
+        title: title.value,
+        url: url.value,
+    });
 
-                block.value.data.links.splice(index, 1);
-            }
+    title.value = '';
+    url.value = '';
+};
 
-            const truncateText = (text, length = 20) => {
-                if(text.length <= 20) {
-                    return text
-                }
+const remove = (uuidToRemove) => {
+    const index = block.value.data.links.findIndex((link) => link.uuid === uuidToRemove);
+    if (index !== -1) {
+        block.value.data.links.splice(index, 1);
+    }
+};
 
-                return text.substring(0, length) + '...'
-            }
-
-            return { block, add, remove, title, url, truncateText }
-        },
-    })
+const truncateText = (text, length = 20) => {
+    return text.length <= length ? text : text.substring(0, length) + '...';
+};
 </script>
