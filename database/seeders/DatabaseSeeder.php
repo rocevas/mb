@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 //        ]);
 
         $user = User::create([
-            'email' => 'sarunas@pulsera.io',
+            'email' => 'sarunas@mailbaker.com',
             'name' => 'Šarūnas Ročevas',
             'password' => Hash::make('secret'),
             'email_verified_at' => now(),

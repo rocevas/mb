@@ -1,5 +1,10 @@
 <template>
     <AppLayout :title="title">
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                Templates
+            </h2>
+        </template>
         <div class="overflow-y-auto">
             <section class="py-10 px-10 w-full mx-auto container relative">
             <div class="grid grid-cols-4 md:grid-cols-6 justify-center gap-12">
@@ -26,7 +31,7 @@
 </template>
 
 <script setup>
-import AppLayout from '../../Layouts/BuilderLayout.vue';
+import AppLayout from '../../Layouts/AppLayout.vue';
 
 const props = defineProps({
     title: String,

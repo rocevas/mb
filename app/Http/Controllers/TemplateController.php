@@ -16,7 +16,7 @@ class TemplateController extends Controller
 
     function index(Request $request): \Inertia\Response
     {
-        return Inertia::render('Builder/Templates', [
+        return Inertia::render('Templates/Templates', [
             'title' => 'Templates',
             'templates' => Template::orderBy('id')->get(['id', 'uid', 'title']),
         ]);
@@ -24,7 +24,7 @@ class TemplateController extends Controller
 
     function create(Template $template): \Inertia\Response
     {
-        return Inertia::render('Builder/Builder', [
+        return Inertia::render('Templates/Builder', [
             'title' => 'Builder',
             'template' => $template,
         ]);
@@ -41,7 +41,7 @@ class TemplateController extends Controller
 
     function show(Template $template): \Inertia\Response
     {
-        return Inertia::render('Builder/Builder', [
+        return Inertia::render('Templates/Builder', [
             'title' => 'Builder',
             'template' => $template,
         ]);
@@ -60,7 +60,7 @@ class TemplateController extends Controller
 
     function preview(Template $template = null): \Inertia\Response
     {
-        return Inertia::render('Builder/Preview', [
+        return Inertia::render('Templates/Preview', [
             'title' => 'Preview',
             'template' => $template,
         ]);
