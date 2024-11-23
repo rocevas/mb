@@ -18,7 +18,7 @@ class TemplateController extends Controller
     {
         return Inertia::render('Builder/Templates', [
             'title' => 'Templates',
-            'templates' => Template::orderBy('id')->get(['id', 'title']),
+            'templates' => Template::orderBy('id')->get(['id', 'uid', 'title']),
         ]);
     }
 

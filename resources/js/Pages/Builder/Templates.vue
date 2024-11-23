@@ -12,7 +12,7 @@
                 </a>
                 <!-- Templates -->
                 <div v-for="(template, index) in props.templates" :key="template.id" class="relative w-full">
-                    <a :href="'/templates/'+template.id" class="">
+                    <a :href="'/templates/'+template.uid" class="">
                         <div class="w-full aspect-square rounded-xl overflow-hidden">
                             <img alt="" src="https://placehold.co/400x400" class="object-contain" />
                         </div>

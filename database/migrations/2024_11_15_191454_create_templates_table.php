@@ -11,12 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('templates', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
+            $table->string('uid', 21)->unique();
+            $table->foreignId('team_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->json('template');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -26,7 +29,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('templates');
     }
