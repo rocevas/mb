@@ -21,7 +21,7 @@
                             </Draggable>
                         </div>
                     </div>
-                    <div class="w-[300px] bg-white px-4 overflow-y-auto transition-all border-l absolute top-0 right-0 bottom-0" :class="{'-right-[300px]': !builderStore.isSidebarOptionsOpened()}">
+                    <div class="w-[300px] bg-white px-4 overflow-y-auto transition-all border-l absolute top-0 right-0 bottom-0" :class="{'!-right-[300px]': !builderStore.isSidebarOptionsOpened()}">
                         <div id="settings">
 
                         </div>

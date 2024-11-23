@@ -1,7 +1,7 @@
 <template>
     <!-- Start filemanager content -->
     <div>
-        <div class="modal flex" :class="{'absolute indent-0 top-0': show}">
+        <div class="modal hidden" :class="{'!flex absolute indent-0 top-0': show}">
             <div class="modal-box modal-fullscreen bg-white z-50">
                 <button class="btn btn-sm btn-circle absolute right-2 top-2" @click="builderStore.filemanager.hideFileManager">✕</button>
                 <div class="navbar flex-col shadow-lg bg-neutral text-neutral-content">
