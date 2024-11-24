@@ -25,26 +25,48 @@
 
     .editor-content {
 
-        table  {
-            @apply w-full;
-            th, td {
-                @apply border;
+        .tiptap {
+
+            h1, h2, h3, p {
+                @apply pb-5 last:pb-0;
             }
-        }
 
-        ul {
-            @apply list-disc pl-3;
-        }
-
-        ol {
-            @apply list-decimal pl-3;
-        }
-
-        .task-list {
-            li {
-                @apply flex gap-2;
+            table  {
+                @apply w-full;
+                th, td {
+                    @apply border;
+                }
             }
+
+            ul {
+                @apply list-disc pl-3;
+            }
+
+            ol {
+                @apply list-decimal pl-3;
+            }
+
+            .task-list {
+                li {
+                    @apply flex gap-2;
+                }
+            }
+
+            .columns {
+                @apply grid;
+                &.columns-2 {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                &.columns-3 {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+                .column {
+                    @apply border border-dashed
+                }
+            }
+
         }
+
     }
 
     .drag-handle {
@@ -82,6 +104,23 @@
             display: none;
             pointer-events: none;
         }
+    }
+
+    .ProseMirror .column-block {
+        width: 100%;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        gap: 24px;
+        padding: 8px 0;
+    }
+
+    .ProseMirror .column {
+        overflow: auto;
+        border: 1px gray dashed;
+        border-radius: 8px;
+        padding: 8px;
+        margin: -8px;
     }
 }
 

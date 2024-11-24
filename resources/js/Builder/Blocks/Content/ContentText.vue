@@ -2,8 +2,7 @@
     <div class="bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="p-4 pt-1">
-                <InlineTextEdit v-model="localBlock.data.text" />-->
-
+                <InlineTextEdit v-model="localBlock.data.text" />
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ export const Column = Node.create({
         return [{ tag: 'div[data-type="column"]' }];
     },
     renderHTML({ HTMLAttributes }) {
-        return ['div', mergeAttributes(HTMLAttributes, { 'data-type': 'column', class: 'col' }), 0];
+        return ['div', mergeAttributes(HTMLAttributes, { 'data-type': 'column', class: 'column' }), 0];
     },
 });
 
@@ -16,12 +16,18 @@ export const Columns = Node.create({
     name: 'columns',
     group: 'block',
     content: 'column+',
+    draggable: true, // Make the entire columns element draggable
     parseHTML() {
         return [{ tag: 'div[data-type="columns"]' }];
     },
     renderHTML({ HTMLAttributes, node }) {
-        const columnsClass = `grid grid-cols-${node.childCount}`;
+        const columnsClass = `columns columns-${node.childCount}`;
         return ['div', mergeAttributes(HTMLAttributes, { 'data-type': 'columns', class: columnsClass }), 0];
+    },
+    addOptions() {
+        return {
+            allowTableNodeSelection: true, // Add this option to allow node selection
+        };
     },
     addCommands() {
         return {
