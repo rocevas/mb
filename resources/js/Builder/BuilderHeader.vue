@@ -1,7 +1,7 @@
 <template>
     <header class="flex justify-between py-3 px-4">
         <div class="flex gap-2">
-            <a href="/" class="btn btn-square">
+            <a :href="route('templates.index')" class="btn btn-square">
                 <Icon name="layout-left"  styles="w-6 h-6"/>
                 </a>
             </div>

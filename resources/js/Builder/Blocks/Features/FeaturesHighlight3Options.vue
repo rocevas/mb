@@ -84,7 +84,7 @@ const block = computed({
     set: (value) => emit('update:modelValue', value),
 });
 
-const imageUrl = ref('https://cdn.mailerlite.com/images/editor/icon1.png')
+const imageUrl = ref('https://placehold.co/600x200')
 const title = ref('New feature')
 const description = ref('Check out this new awesome feature')
 

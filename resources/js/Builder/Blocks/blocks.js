@@ -15,9 +15,9 @@ const groups = ref([
                 componentName: 'HeaderLogo',
                 optionsComponentName: 'HeaderLogoOptions',
                 description: 'Logo',
-                thumbUrl: '/images/thumbs/v1/header/logo.png',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
-                    imageUrl: 'https://cdn.mailerlite.com/images/editor/logo.png',
+                    imageUrl: 'https://placehold.co/600x200',
                 }
             },
         ]
@@ -35,9 +35,9 @@ const groups = ref([
                 componentName: 'ContentImage',
                 optionsComponentName: 'ContentImageOptions',
                 description: 'Image',
-                thumbUrl: 'https://placeholder.mailerlite.com/1020x260-icon_v2.jpg',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
-                    imageUrl: 'https://placeholder.mailerlite.com/1020x260-icon_v2.jpg',
+                    imageUrl: 'https://placehold.co/600x200',
                     paddingTop: 0,
                     paddingBottom: 0,
                 },
@@ -51,7 +51,7 @@ const groups = ref([
                 componentName: 'ContentVideo',
                 optionsComponentName: 'ContentVideoOptions',
                 description: 'Video',
-                thumbUrl: 'https://placeholder.mailerlite.com/640x200-video_v2.jpg',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     youtubeVideoUrl: '',
                     youtubeVideoCode: '',
@@ -66,7 +66,7 @@ const groups = ref([
                 componentName: 'ContentTitle',
                 optionsComponentName: 'ContentTitleOptions',
                 description: 'Title',
-                thumbUrl: '/images/thumbs/v1/content/title.jpg',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     title: 'Daily news',
                 },
@@ -80,7 +80,7 @@ const groups = ref([
                 componentName: 'ContentText',
                 optionsComponentName: 'ContentTextOptions',
                 description: 'Text',
-                thumbUrl: '/images/thumbs/v1/content/text.png',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.',
                 },
@@ -94,12 +94,12 @@ const groups = ref([
                 componentName: 'ContentHorizontalImageText',
                 optionsComponentName: 'ContentHorizontalImageTextOptions',
                 description: 'Image and Text',
-                thumbUrl: '/images/thumbs/v1/content/h-img-text.png',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     subtitle: 'September 1',
                     heading: 'Getting Cheap Airfare For Last Minute Travel',
                     text: 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime possimus, omnis voluptas.',
-                    imageUrl: 'https://cdn.mailerlite.com/images/editor/img6.png',
+                    imageUrl: 'https://placehold.co/600x200',
                 }
             },
             {
@@ -111,12 +111,12 @@ const groups = ref([
                 componentName: 'ContentHorizontalTextImage',
                 optionsComponentName: 'ContentHorizontalTextImageOptions',
                 description: 'Text and Image',
-                thumbUrl: '/images/thumbs/v1/content/h-text-img.png',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     subtitle: 'September 1',
                     heading: 'Nailing It On The Head With Free Internet Advertising',
                     text: 'These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure.',
-                    imageUrl: 'https://cdn.mailerlite.com/images/editor/img7.png',
+                    imageUrl: 'https://placehold.co/600x200',
                 }
             },
             {
@@ -128,7 +128,7 @@ const groups = ref([
                 componentName: 'ContentLinks',
                 optionsComponentName: 'ContentLinksOptions',
                 description: 'Links',
-                thumbUrl: '/images/thumbs/v1/content/links.png',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     links: [
                         {
@@ -174,7 +174,7 @@ const groups = ref([
                 componentName: 'ButtonsButton',
                 optionsComponentName: 'ButtonsButtonOptions',
                 description: 'Button',
-                thumbUrl: '/images/thumbs/v1/buttons/button1.jpg',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     title: 'Button',
                     url: '',
@@ -190,7 +190,7 @@ const groups = ref([
                 componentName: 'ButtonsTwoButtons',
                 optionsComponentName: 'ButtonsTwoButtonsOptions',
                 description: 'Two Buttons',
-                thumbUrl: '/images/thumbs/v1/buttons/button1.jpg',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     buttons: [
                         {
@@ -218,7 +218,7 @@ const groups = ref([
                 componentName: 'ButtonsThreeButtons',
                 optionsComponentName: 'ButtonsThreeButtonsOptions',
                 description: 'Three Buttons',
-                thumbUrl: '/images/thumbs/v1/buttons/button1.jpg',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     buttons: [
                         {
@@ -258,26 +258,26 @@ const groups = ref([
                 componentName: 'FeaturesHighlight3',
                 optionsComponentName: 'FeaturesHighlight3Options',
                 description: 'Highlight 3',
-                thumbUrl: '/images/thumbs/v1/features/highlight-3.png',
+                thumbUrl: 'https://placehold.co/600x200',
                 data: {
                     title: 'Features',
                     subtitle: 'Sed ut perspiciatis unde omnis iste natus',
                     list: [
                         {
                             uuid: nanoid(),
-                            imageUrl: 'https://cdn.mailerlite.com/images/editor/icon1.png',
+                            imageUrl: 'https://placehold.co/600x200',
                             title: 'Time saver',
                             description: 'Save a lot of time building your newsletter'
                         },
                         {
                             uuid: nanoid(),
-                            imageUrl: 'https://cdn.mailerlite.com/images/editor/icon2.png',
+                            imageUrl: 'https://placehold.co/600x200',
                             title: 'Clean design',
                             description: 'We designed blocks that look really good and clean.'
                         },
                         {
                             uuid: nanoid(),
-                            imageUrl: 'https://cdn.mailerlite.com/images/editor/icon3.png',
+                            imageUrl: 'https://placehold.co/600x200',
                             title: 'Easily customizable',
                             description: 'It is easy for anyone to make a perfect newsletter.'
                         },
