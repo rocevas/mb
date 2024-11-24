@@ -2,7 +2,7 @@
     <div class="bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="p-4 pt-1">
-                <TiptapEditor v-model="localBlock.data.text" />-->
+                <InlineTextEdit v-model="localBlock.data.text" />-->
 
             </div>
         </div>
@@ -11,7 +11,7 @@
 
 <script setup>
 import {computed, onMounted} from 'vue';
-import TiptapEditor from "@/Builder/Blocks/TiptapEditor.vue";
+import InlineTextEdit from "@/Builder/Components/Edits/InlineTextEdit.vue";
 
 const props = defineProps({
     block: {

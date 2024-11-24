@@ -1,5 +1,8 @@
 <template>
     <EditorContent :editor="editor" class="editor-content" />
+    <BubbleMenu v-if="editor" :editor="editor">
+        <BubbleMenu :editor="editor" />
+    </BubbleMenu>
 </template>
 
 <script setup>
@@ -15,8 +18,9 @@ import TableRow from '@tiptap/extension-table-row'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 
-import Commands from '../Components/Commands/commands.js';
-import suggestion from '../Components/Commands/suggestion.js'
+import SlashCommands from '@/Builder/Components/Tiptap/SlashCommands/SlashCommands.js';
+import suggestion from '@/Builder/Components/Tiptap/SlashCommands/suggestion.js'
+import { Column, Columns } from '@/Builder/Components/Tiptap/Columns/ColumnExtension.js';
 
 const props = defineProps({
     modelValue: {
@@ -46,7 +50,7 @@ const editor = useEditor({
         TaskItem,
         DragHandle.configure({handleSelector: '.drag-handle'}),
         AutoJoiner,
-        Commands.configure({
+        SlashCommands.configure({
             suggestion,
         }),
         Table.configure({
@@ -55,6 +59,8 @@ const editor = useEditor({
         TableRow,
         TableCell,
         TableHeader,
+        Column,
+        Columns,
     ],
     onUpdate: ({ editor }) => {
         emit('update:modelValue', editor.getHTML())

@@ -1,7 +1,7 @@
 import { VueRenderer } from '@tiptap/vue-3'
 import tippy from 'tippy.js'
 
-import CommandsList from './CommandsList.vue'
+import SlashCommandsList from './SlashCommandsList.vue'
 
 export default {
     items: ({ query }) => {
@@ -83,6 +83,18 @@ export default {
                     editor.chain().focus().deleteRange(range).insertTable({ rows: 3, cols: 3 }).run();
                 },
             },
+            {
+                title: '2 Columns',
+                command: ({ editor, range }) => {
+                    editor.chain().focus().deleteRange(range).insertColumns(2).run();
+                },
+            },
+            {
+                title: '3 Columns',
+                command: ({ editor, range }) => {
+                    editor.chain().focus().deleteRange(range).insertColumns(3).run();
+                },
+            },
         ].filter(item => item.title.toLowerCase().startsWith(query.toLowerCase())).slice(0, 10)
     },
 
@@ -92,7 +104,7 @@ export default {
 
         return {
             onStart: props => {
-                component = new VueRenderer(CommandsList, {
+                component = new VueRenderer(SlashCommandsList, {
                     // using vue 2:
                     // parent: this,
                     // propsData: props,
