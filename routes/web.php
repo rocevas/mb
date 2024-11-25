@@ -24,13 +24,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
-//Route::get('/', [TemplateController::class, 'index'])->name('home');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-Route::get('templates/preview', [TemplateController::class, 'preview'])->name('templates.no.preview');
-Route::get('templates/{template?}/preview', [TemplateController::class, 'preview'])->name('templates.preview');
+    Route::get('templates/preview', [TemplateController::class, 'preview'])->name('templates.no.preview');
+    Route::get('templates/{template?}/preview', [TemplateController::class, 'preview'])->name('templates.preview');
+    Route::resource('templates', TemplateController::class, ['except' => ['destroy', 'edit']]);
+    Route::any('templates/email', [TemplateController::class, 'email'])->name('templates.email');
 
-Route::resource('templates', TemplateController::class, ['except' => ['destroy', 'edit']]);
-
-Route::any('templates/email', [TemplateController::class, 'email'])->name('templates.email');
-
-
+});
