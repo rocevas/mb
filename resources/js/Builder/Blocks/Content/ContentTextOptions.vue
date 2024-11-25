@@ -3,7 +3,7 @@
         <div>
             <span class="text-sm font-medium uppercase">Text</span>
             <div class="flex items-center justify-between">
-                <textarea class="textarea w-full textarea-bordered h-64" v-model="block.data.text" placeholder=""></textarea>
+                <textarea class="textarea w-full textarea-bordered h-64" v-model="block.data" placeholder=""></textarea>
             </div>
         </div>
     </div>

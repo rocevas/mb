@@ -82,8 +82,16 @@ const groups = ref([
                 description: 'Text',
                 thumbUrl: 'https://placehold.co/600x200',
                 data: {
-                    text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.',
-                },
+                    blocks: [
+                        {
+                            id: "QSE1ndpWYF",
+                            type: "paragraph",
+                            data: {
+                                text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto."
+                            }
+                        }
+                    ]
+                }
             },
             {
                 uuid: nanoid(),

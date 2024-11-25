@@ -1,85 +1,96 @@
 <template>
-    <EditorContent :editor="editor" class="editor-content" />
+    <div class="editorjs" ref="htmlelement"></div>
 </template>
 
 <script setup>
-import StarterKit from '@tiptap/starter-kit';
-import { EditorContent, useEditor } from '@tiptap/vue-3';
-import Placeholder from '@tiptap/extension-placeholder';
-import TaskList from '@tiptap/extension-task-list';
-import TaskItem from '@tiptap/extension-task-item';
-import Table from '@tiptap/extension-table';
-import TableRow from '@tiptap/extension-table-row';
-import TableCell from '@tiptap/extension-table-cell';
-import TableHeader from '@tiptap/extension-table-header';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
+import EditorJS from '@editorjs/editorjs';
+import DragDrop from 'editorjs-drag-drop';
+import ListTool from '@editorjs/list';
+import ImageTool from '@editorjs/image';
+import TableTool from '@editorjs/table';
+import TwoColumnTool from '../Editorjs/TwoColumnTool.js';
+import ThreeColumnTool from '../Editorjs/ThreeColumnTool.js';
+import VideoTool from '../Editorjs/VideoTool.js';
 
-import AutoJoiner from 'tiptap-extension-auto-joiner'
-
-import GlobalDragHandle from 'tiptap-extension-global-drag-handle';
-import SlashCommands from '@/Builder/Components/Tiptap/SlashCommands/SlashCommands.js';
-import suggestion from '@/Builder/Components/Tiptap/SlashCommands/suggestion.js';
-import { Column, Columns } from '@/Builder/Components/Tiptap/Columns/ColumnExtension.js';
-
-
+const htmlelement = ref(null);
 const props = defineProps({
     modelValue: {
-        type: String,
+        type: [String, Object],
         default: '',
     },
     placeholder: {
         type: String,
-        default: 'Type here'
+        default: 'Type here...',
     },
 });
-
 const emit = defineEmits(['update:modelValue']);
+let editor;
+let updatingModel = false;
 
-const editor = useEditor({
-    content: props.modelValue,
-    extensions: [
-        StarterKit,
-        Placeholder.configure({
-            placeholder: "Type '/' to open the command menu...",
-        }),
-        TaskList.configure({
-            HTMLAttributes: {
-                class: 'task-list',
-            },
-        }),
-        TaskItem,
-        AutoJoiner,
-        GlobalDragHandle.configure({
-            dragHandleWidth: 20,
-            scrollTreshold: 100, // default
-            excludedTags: ['div.column']
-        }),
-        SlashCommands.configure({
-            suggestion,
-        }),
-        Table.configure({
-            allowTableNodeSelection: true
-        }),
-        TableRow,
-        TableCell,
-        TableHeader,
-        Column,
-        Columns.configure({
-            allowTableNodeSelection: true
-        }),
-    ],
-    onUpdate: ({editor}) => {
-        emit('update:modelValue', editor.getHTML());
-    },
+// model -> view
+function modelToView() {
+    if (!props.modelValue) return;
+    if (typeof props.modelValue === 'string') {
+        editor.blocks.renderFromHTML(props.modelValue);
+        return;
+    }
+    editor.render(props.modelValue);
+}
+
+// view -> model
+function viewToModel(api, event) {
+    updatingModel = true;
+    editor.save().then((outputData) => {
+        emit('update:modelValue', outputData);
+    }).catch((error) => {
+        console.error('Saving failed:', error);
+    }).finally(() => {
+        updatingModel = false;
+    });
+}
+
+onMounted(() => {
+    editor = new EditorJS({
+        holder: htmlelement.value,
+        placeholder: props.placeholder,
+        inlineToolbar: ['bold', 'italic', 'link'],
+        tools: {
+            list: ListTool,
+            image: ImageTool,
+            table: TableTool,
+            video: VideoTool,
+            twoColumns: TwoColumnTool,
+            threeColumns: ThreeColumnTool,
+        },
+        minHeight: 'auto',
+        data: props.modelValue,
+        onReady: () => {
+            modelToView();
+            new DragDrop(editor);
+        },
+        onChange: viewToModel,
+    });
 });
 
-defineExpose({
-    editor,
+const computedModelValue = computed(() => props.modelValue);
+
+computedModelValue.value; // Access the computed property to trigger reactivity
+
+onUnmounted(() => {
+    editor.destroy();
 });
 </script>
 
-<style scoped>
-.drag-handle {
-    cursor: grab;
-    user-select: none;
+<style>
+.column-tool {
+    display: flex;
+    gap: 1rem;
+}
+
+.column-tool .column {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 1rem;
 }
 </style>
