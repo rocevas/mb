@@ -6,8 +6,8 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import EditorJS from '@editorjs/editorjs';
 import DragDrop from 'editorjs-drag-drop';
+import ImageTool from '../Editorjs/ImageTool.js';
 import ListTool from '@editorjs/list';
-import ImageTool from '@editorjs/image';
 import TableTool from '@editorjs/table';
 import TwoColumnTool from '../Editorjs/TwoColumnTool.js';
 import ThreeColumnTool from '../Editorjs/ThreeColumnTool.js';
@@ -24,12 +24,13 @@ const props = defineProps({
         default: 'Type here...',
     },
 });
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'showFileManager']);
+const localBlock = computed(() => props.modelValue);
 let editor;
 let updatingModel = false;
 
 // model -> view
-function modelToView() {
+const modelToView = () => {
     if (!props.modelValue) return;
     if (typeof props.modelValue === 'string') {
         editor.blocks.renderFromHTML(props.modelValue);
@@ -39,7 +40,7 @@ function modelToView() {
 }
 
 // view -> model
-function viewToModel(api, event) {
+const viewToModel = (api, event) => {
     updatingModel = true;
     editor.save().then((outputData) => {
         emit('update:modelValue', outputData);
@@ -50,16 +51,53 @@ function viewToModel(api, event) {
     });
 }
 
+const handleShowFileManager = () => {
+    console.log('Emitting showFileManager with:', props.modelValue, 'image');
+    emit('showFileManager', props.modelValue, 'image');
+}
+
 onMounted(() => {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     editor = new EditorJS({
         holder: htmlelement.value,
         placeholder: props.placeholder,
         inlineToolbar: ['bold', 'italic', 'link'],
         tools: {
             list: ListTool,
-            image: ImageTool,
             table: TableTool,
             video: VideoTool,
+            // image: {
+            //     class: ImageTool,
+            //     config: {
+            //         endpoints: {
+            //             byFile: '/uploadFile', // Your endpoint that provides file uploading
+            //             byUrl: '/fetchUrl', // Your endpoint that provides URL fetching
+            //         },
+            //         additionalRequestHeaders: {
+            //             'X-CSRF-TOKEN': csrfToken
+            //         },
+            //         features: {
+            //             border: false,
+            //             caption: false,
+            //             // background: false,
+            //         }
+            //     }
+            // },
+            image: {
+                class: ImageTool,
+                config: {
+                    endpoints: {
+                        byFile: '/uploadFile', // Your endpoint that provides file uploading
+                        byUrl: '/fetchUrl', // Your endpoint that provides URL fetching
+                    },
+                    additionalRequestHeaders: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    features: {
+                        caption: false,
+                    }
+                }
+            },
             twoColumns: TwoColumnTool,
             threeColumns: ThreeColumnTool,
         },
@@ -81,16 +119,3 @@ onUnmounted(() => {
     editor.destroy();
 });
 </script>
-
-<style>
-.column-tool {
-    display: flex;
-    gap: 1rem;
-}
-
-.column-tool .column {
-    flex: 1;
-    border: 1px solid #ccc;
-    padding: 1rem;
-}
-</style>

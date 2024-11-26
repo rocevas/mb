@@ -1,7 +1,7 @@
 <template>
     <div class="relative group/section">
         <div @click="handleOptionsEvent(true)">
-            <component :is="blocks[block?.componentName]" :block="block" class="border-2 border-transparent group-hover/section:border-primary"/>
+            <component :is="blocks[block?.componentName]" :block="block" @showFileManager="handleShowFileManager" class="border-2 border-transparent group-hover/section:border-primary"/>
         </div>
 
         <div class="absolute -top-4 left-4 flex flex-row p-0 -ml-1.5 hidden group-hover/section:flex bg-transparent">

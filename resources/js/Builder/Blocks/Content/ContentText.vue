@@ -2,7 +2,7 @@
     <div class="bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="p-4 pt-1">
-                <InlineTextEdit v-model="localBlock.data" />
+                <InlineTextEdit v-model="localBlock.data" @showFileManager="forwardShowFileManager" />
             </div>
         </div>
     </div>
@@ -18,7 +18,11 @@ const props = defineProps({
         required: true,
     }
 });
-
+const emit = defineEmits(['showFileManager']);
 const localBlock = computed(() => props.block);
+
+const forwardShowFileManager = (data, type) => {
+    emit('showFileManager', data, type);
+};
 
 </script>

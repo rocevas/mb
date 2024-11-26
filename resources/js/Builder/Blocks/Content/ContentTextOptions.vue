@@ -22,7 +22,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue']);
 
 const block = computed({
-    get: () => props.modelValue,
+    get: () => JSON.stringify(props.modelValue),
     set: (value) => emit('update:modelValue', value),
 });
 </script>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +33,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::any('templates/email', [TemplateController::class, 'email'])->name('templates.email');
 
 });
+
+Route::post('/uploadFile', [ImageUploadController::class, 'uploadFile']);
+Route::post('/fetchUrl', [ImageUploadController::class, 'fetchUrl']);

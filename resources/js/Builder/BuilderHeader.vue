@@ -1,10 +1,10 @@
 <template>
     <header class="flex justify-between py-3 px-4">
         <div class="flex gap-2">
-            <a :href="route('templates.index')" class="btn btn-square">
+            <Link :href="route('templates.index')" class="btn btn-square">
                 <Icon name="layout-left"  styles="w-6 h-6"/>
-                </a>
-            </div>
+            </Link>
+        </div>
         <div class="flex gap-4">
             <a class="btn btn-square" href="/templates/preview" target="_blank">
                 <Icon name="play" styles="w-7 h-7" />
@@ -25,6 +25,7 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3';
 import Icon from './Components/Icon.vue';
 import { useBuilderStore } from './Stores/BuilderStore.js';
 

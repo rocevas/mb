@@ -5,7 +5,7 @@
             <div>
                 <span class="text-sm font-medium uppercase">Image</span>
                 <div class="btn aspect-w-2 aspect-h-1 block w-full overflow-hidden rounded-lg">
-                    <img :src="block.data.imageUrl" alt="" class="object-cover" @click="$emit('showFileManager', block.data, 'imageUrl')" />
+                    <img :src="block.data.imageUrl" alt="" class="object-cover" @click="handleShowFileManager" />
                 </div>
             </div>
             <div class="divider my-2"></div>
@@ -35,6 +35,14 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'showFileManager']);
+
+const handleShowFileManager = () => {
+    if (!block.value.data) {
+        block.value.data = {};
+    }
+    console.log('Emitting showFileManager with:', block.value.data, 'imageUrl');
+    emit('showFileManager', block.value.data, 'imageUrl');
+}
 
 const block = computed({
     get: () => props.modelValue,

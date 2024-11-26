@@ -90,14 +90,6 @@ export const useFileManagerStore = defineStore('FileManagerStore', {
                 "url": "https://www.mailerlite.com/assets/blog/cover-mailersend.jpg",
                 "title": "Team 8"
             },
-            {
-                "url": "https://stats-tv.remotecompany.com/images/A1170395.jpg",
-                "title": "Beach vibe"
-            },
-            {
-                "url": "https://stats-tv.remotecompany.com/images/AZOR0995FIN.jpg",
-                "title": "Laptop"
-            }
         ])
     }),
     getters: {
