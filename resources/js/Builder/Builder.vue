@@ -10,9 +10,9 @@
                     <div class="w-[80px] bg-white px-4 overflow-y-auto border-r absolute top-0 left-0 bottom-0">
                         <BlockGroup v-for="group in groups" :key="group.uuid" :title="group.title" :blocks="group.blocks"/>
                     </div>
-                    <div class="flex flex-1 overflow-y-auto transition-all pl-[80px] pr-0" :class="{'!pr-[300px]': builderStore.isSidebarOptionsOpened()}">
-                        <div class="mx-auto max-w-[640px] w-full rounded-lg border my-6">
-                            <Draggable class="dragArea min-h-[10rem] rounded-lg" :list="builderStore.getBlocks()" handle=".handle" group="blocks" item-key="uuid" :class="{'border-dashed border-2 border-gray-200': builderStore.getBlocks().length === 0}">
+                    <div class="h-full overflow-y-auto transition-all pl-[80px] pr-0" :class="{'!pr-[300px]': builderStore.isSidebarOptionsOpened()}">
+                        <div class="mx-auto max-w-[640px] w-full rounded-lg border my-6 list-none">
+                            <Draggable class="h-full min-h-[10rem]" :list="builderStore.getBlocks()" handle=".handle" group="blocks" item-key="uuid" :class="{'border-dashed border-2 border-gray-200': builderStore.getBlocks().length === 0}">
                                 <template #item="{ element, index }">
                                     <div>
                                         <BlockWrapper :block="element" :index="index" @clone="cloneBlock(index)" @delete="deleteBlock(index)" />
@@ -130,6 +130,8 @@ const close = () => {
 onMounted(() => {
     if (props.template.template) {
         builderStore.setBuilder(JSON.parse(props.template.template));
+    } else {
+        // builderStore.setBuilder([]);
     }
 })
 

@@ -1,11 +1,11 @@
 <template>
-    <div class="editorjs" ref="htmlelement"></div>
+    <div class="editor" ref="htmlelement"></div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import EditorJS from '@editorjs/editorjs';
-import DragDrop from 'editorjs-drag-drop';
+// import DragDrop from 'editorjs-drag-drop';
 import ImageTool from '../Editorjs/ImageTool.js';
 import ListTool from '@editorjs/list';
 import TableTool from '@editorjs/table';
@@ -63,26 +63,17 @@ onMounted(() => {
         placeholder: props.placeholder,
         inlineToolbar: ['bold', 'italic', 'link'],
         tools: {
-            list: ListTool,
+            list: {
+                class: ListTool,
+                inlineToolbar: true,
+                config: {
+                    defaultStyle: 'unordered',
+                    maxLevel: 1,
+                    checklists: false,
+                },
+            },
             table: TableTool,
             video: VideoTool,
-            // image: {
-            //     class: ImageTool,
-            //     config: {
-            //         endpoints: {
-            //             byFile: '/uploadFile', // Your endpoint that provides file uploading
-            //             byUrl: '/fetchUrl', // Your endpoint that provides URL fetching
-            //         },
-            //         additionalRequestHeaders: {
-            //             'X-CSRF-TOKEN': csrfToken
-            //         },
-            //         features: {
-            //             border: false,
-            //             caption: false,
-            //             // background: false,
-            //         }
-            //     }
-            // },
             image: {
                 class: ImageTool,
                 config: {
@@ -103,10 +94,11 @@ onMounted(() => {
         },
         minHeight: 'auto',
         data: props.modelValue,
-        onReady: () => {
-            modelToView();
-            new DragDrop(editor);
-        },
+        // onReady: () => {
+        //     modelToView();
+        //     new DragDrop(editor);
+        // },
+        onReady: modelToView,
         onChange: viewToModel,
     });
 });

@@ -1,42 +1,42 @@
 <template>
-    <div class="relative group/section">
-        <div @click="handleOptionsEvent(true)">
-            <component :is="blocks[block?.componentName]" :block="block" @showFileManager="handleShowFileManager" class="border-2 border-transparent group-hover/section:border-primary"/>
-        </div>
+    <div class="relative group/section hover:z-10">
+        <div class="pr-12 -mr-12">
+            <div class="outline outline-transparent group-hover/section:outline-teal-500/50">
+                <component :is="blocks[block?.componentName]" :block="block" @showFileManager="handleShowFileManager" class="border-2 border-transparent group-hover/section:border-primary"/>
+            </div>
 
-        <div class="absolute -top-4 left-4 flex flex-row p-0 -ml-1.5 hidden group-hover/section:flex bg-transparent">
-            <div class="flex flex-col items-center justify-center drawer-content pr-2">
-                <label class="btn btn-sm btn-ghost handle drawer-button px-1 rounded-full bg-base-300 group-hover/section:bg-base-300">
-                    <Icon name="draggable" class="h-5 w-5 text-base-content/50 cursor-move"/>
-                </label>
-            </div>
-            <div class="flex flex-col items-center justify-center drawer-content pr-2">
-                <label @click="handleMoveEvent('up')" class="btn btn-sm btn-ghost handle drawer-button px-1 rounded-full bg-base-300 group-hover/section:bg-base-300">
-                    <Icon name="chevron-up" class="h-5 w-5 text-base-content/50"/>
-                </label>
-            </div>
-            <div class="flex flex-col items-center justify-center drawer-content pr-2">
-                <label @click="handleMoveEvent('down')" class="btn btn-sm btn-ghost handle drawer-button px-1 rounded-full bg-base-300 group-hover/section:bg-base-300">
-                    <Icon name="chevron-down" class="h-5 w-5 text-base-content/50"/>
-                </label>
-            </div>
-        </div>
+            <div class="absolute top-0 -right-10 hidden group-hover/section:flex">
+                <Dropdown align="left">
+                    <template #trigger>
+                        <button class="ce-toolbar__settings-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 7.29999H9.4"></path><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 7.29999H14.59"></path><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.30999 12H9.3"></path><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 12H14.59"></path><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M9.40999 16.7H9.4"></path><path stroke="currentColor" stroke-linecap="round" stroke-width="2.6" d="M14.6 16.7H14.59"></path></svg>
+                        </button>
+                    </template>
 
-        <div class="absolute -top-4 right-4 flex flex-row p-0 -ml-1.5 rounded-md hidden group-hover/section:flex bg-transparent">
-            <div class="flex flex-col items-center justify-center drawer-content pr-2">
-                <label @click="handleOptionsEvent(true)" :for="block.uuid" class="btn btn-sm btn-ghost drawer-button px-1 rounded-full bg-base-300 group-hover/section:bg-base-300">
-                    <Icon name="pencil" class="h-5 w-5 text-base-content/50"/>
-                </label>
-            </div>
-            <div class="flex flex-col items-center justify-center drawer-content pr-2">
-                <label @click="handleCloneEvent()" :for="block.uuid" class="btn btn-sm btn-ghost drawer-button px-1 rounded-full bg-base-300 group-hover/section:bg-base-300">
-                    <Icon name="copy" class="h-5 w-5 text-base-content/50"/>
-                </label>
-            </div>
-            <div class="flex flex-col items-center justify-center drawer-content">
-                <label @click="handleDeleteEvent()" class="btn btn-sm btn-ghost drawer-button px-1 rounded-full bg-base-300 group-hover/section:bg-base-300">
-                    <Icon name="trash" class="h-5 w-5 text-base-content/50"/>
-                </label>
+                    <template #content>
+                        <DropdownLink @click="handleOptionsEvent(true)" :for="block.uuid" as="button" class="flex gap-2">
+                            <Icon name="pencil" class="h-5 w-5 text-base-content/50"/> Edit
+                        </DropdownLink>
+
+                        <DropdownLink @click="handleCloneEvent()" :for="block.uuid" as="button" class="flex gap-2">
+                            <Icon name="copy" class="h-5 w-5 text-base-content/50"/> Duplicate
+                        </DropdownLink>
+
+                        <DropdownLink @click="handleDeleteEvent()" as="button" class="flex gap-2">
+                            <Icon name="trash" class="h-5 w-5 text-base-content/50"/> Delete
+                        </DropdownLink>
+
+                        <div class="border-t border-gray-200 dark:border-gray-600" />
+
+                        <DropdownLink @click="handleMoveEvent('up')" as="button">
+                            Move up
+                        </DropdownLink>
+
+                        <DropdownLink @click="handleMoveEvent('down')" as="button">
+                            Move down
+                        </DropdownLink>
+                    </template>
+                </Dropdown>
             </div>
         </div>
     </div>
@@ -63,6 +63,7 @@
 <script setup>
 import {computed} from 'vue'
 import {useBuilderStore} from '../Stores/BuilderStore.js'
+import Dropdown from '@/Components/Dropdown.vue';
 import Icon from '../Components/Icon.vue'
 
 import ButtonsButton from './Buttons/ButtonsButton.vue'
@@ -93,6 +94,10 @@ import FeaturesHighlight3Options from './Features/FeaturesHighlight3Options.vue'
 
 import ContentLinks from './Content/ContentLinks.vue'
 import ContentLinksOptions from './Content/ContentLinksOptions.vue'
+
+import Section from './Sections/Section.vue'
+import SectionOptions from './Sections/SectionOptions.vue'
+import DropdownLink from "@/Components/DropdownLink.vue";
 
 const props = defineProps({
     block: {
@@ -164,5 +169,8 @@ const blocks = {
 
     ContentLinks,
     ContentLinksOptions,
+
+    Section,
+    SectionOptions
 }
 </script>
