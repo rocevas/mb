@@ -1,10 +1,11 @@
 import EditorJS from '@editorjs/editorjs';
+import { IconPlay } from '@codexteam/icons';
 
 class VideoTool {
     static get toolbox() {
         return {
             title: 'Video',
-            icon: '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M10 8.64L15.27 12 10 15.36V8.64M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>',
+            icon: IconPlay,
         };
     }
 

@@ -5,6 +5,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import EditorJS from '@editorjs/editorjs';
+import { IconListNumbered, IconListBulleted } from '@codexteam/icons';
 // import DragDrop from 'editorjs-drag-drop';
 import ImageTool from '../Editorjs/ImageTool.js';
 import ListTool from '@editorjs/list';
@@ -63,17 +64,41 @@ onMounted(() => {
         placeholder: props.placeholder,
         inlineToolbar: ['bold', 'italic', 'link'],
         tools: {
+            // list: {
+            //     class: ListTool,
+            //     inlineToolbar: true,
+            //     config: {
+            //         defaultStyle: 'unordered',
+            //         maxLevel: 1,
+            //         checklists: false,
+            //     },
+            // },
             list: {
                 class: ListTool,
                 inlineToolbar: true,
+                // shortcut: 'CMD+SHIFT+L',
                 config: {
                     defaultStyle: 'unordered',
                     maxLevel: 1,
-                    checklists: false,
                 },
+                toolbox: [
+                    {
+                        icon: IconListNumbered, // OL icon
+                        title: 'Ordered List',
+                        data: {
+                            style: 'ordered',
+                        }
+                    },
+                    {
+                        icon: IconListBulleted, // UL icon
+                        title: 'Unordered List',
+                        data: {
+                            style: 'unordered',
+                        }
+                    }
+                ]
             },
-            table: TableTool,
-            video: VideoTool,
+
             image: {
                 class: ImageTool,
                 config: {
@@ -89,6 +114,8 @@ onMounted(() => {
                     }
                 }
             },
+            video: VideoTool,
+            table: TableTool,
             twoColumns: TwoColumnTool,
             threeColumns: ThreeColumnTool,
         },
