@@ -1,18 +1,22 @@
 <template>
     <div class="editor" ref="htmlelement"></div>
+    {{ computedModelValue }}
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import EditorJS from '@editorjs/editorjs';
 import { IconListNumbered, IconListBulleted } from '@codexteam/icons';
-// import DragDrop from 'editorjs-drag-drop';
+import Strikethrough from '@sotaproject/strikethrough';
+import Paragraph from '@editorjs/paragraph';
+import Header from '@editorjs/header';
 import ImageTool from '../Editorjs/ImageTool.js';
 import ListTool from '@editorjs/list';
 import TableTool from '@editorjs/table';
 import TwoColumnTool from '../Editorjs/TwoColumnTool.js';
 import ThreeColumnTool from '../Editorjs/ThreeColumnTool.js';
 import VideoTool from '../Editorjs/VideoTool.js';
+import Alignment from '../Editorjs/Alignment.js';
 
 const htmlelement = ref(null);
 const props = defineProps({
@@ -62,21 +66,34 @@ onMounted(() => {
     editor = new EditorJS({
         holder: htmlelement.value,
         placeholder: props.placeholder,
-        inlineToolbar: ['bold', 'italic', 'link'],
+        inlineToolbar: ['bold', 'italic', 'strikethrough', 'link', 'alignment'],
         tools: {
-            // list: {
-            //     class: ListTool,
-            //     inlineToolbar: true,
-            //     config: {
-            //         defaultStyle: 'unordered',
-            //         maxLevel: 1,
-            //         checklists: false,
-            //     },
-            // },
+            strikethrough: Strikethrough,
+            alignment: {
+                class: Alignment,
+                config: {
+                    title: 'Alignment'
+                }
+            },
+            paragraph: {
+                class: Paragraph,
+                inlineToolbar: true,
+                config: {
+                    placeholder: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+                },
+            },
+            header: {
+                class: Header,
+                inlineToolbar: true,
+                config: {
+                    placeholder: 'This is heading',
+                    levels: [2, 3, 4],
+                    defaultLevel: 3
+                },
+            },
             list: {
                 class: ListTool,
                 inlineToolbar: true,
-                // shortcut: 'CMD+SHIFT+L',
                 config: {
                     defaultStyle: 'unordered',
                     maxLevel: 1,
@@ -98,7 +115,6 @@ onMounted(() => {
                     }
                 ]
             },
-
             image: {
                 class: ImageTool,
                 config: {
@@ -115,16 +131,19 @@ onMounted(() => {
                 }
             },
             video: VideoTool,
-            table: TableTool,
+            table: {
+                class: TableTool,
+                inlineToolbar: true,
+                config: {
+                    rows: 2,
+                    cols: 3
+                }
+            },
             twoColumns: TwoColumnTool,
             threeColumns: ThreeColumnTool,
         },
         minHeight: 'auto',
         data: props.modelValue,
-        // onReady: () => {
-        //     modelToView();
-        //     new DragDrop(editor);
-        // },
         onReady: modelToView,
         onChange: viewToModel,
     });
