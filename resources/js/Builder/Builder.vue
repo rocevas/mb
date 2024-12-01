@@ -11,7 +11,7 @@
                         <BlockGroup v-for="group in groups" :key="group.uuid" :title="group.title" :blocks="group.blocks"/>
                     </div>
                     <div class="h-full overflow-y-auto transition-all pl-[80px] pr-0" :class="{'!pr-[300px]': builderStore.isSidebarOptionsOpened()}">
-                        <div class="mx-auto max-w-[640px] w-full rounded-lg border my-6 list-none">
+                        <div class="mx-auto max-w-[640px] w-full my-6 list-none">
                             <Draggable class="h-full min-h-[10rem]" :list="builderStore.getBlocks()" handle=".handle" group="blocks" item-key="uuid" :class="{'border-dashed border-2 border-gray-200': builderStore.getBlocks().length === 0}">
                                 <template #item="{ element, index }">
                                     <div>
@@ -131,7 +131,7 @@ onMounted(() => {
     if (props.template.template) {
         builderStore.setBuilder(JSON.parse(props.template.template));
     } else {
-        // builderStore.setBuilder([]);
+        builderStore.setBuilder([]);
     }
 })
 

@@ -2,7 +2,7 @@
     <div>
         <div class="w-full">
             <div class="py-4 px-10">
-                <InlineTextEdit v-model="localBlock" @showFileManager="forwardShowFileManager" />
+                <InlineTextEdit v-model="localBlock.data" @showFileManager="forwardShowFileManager" />
             </div>
         </div>
     </div>
